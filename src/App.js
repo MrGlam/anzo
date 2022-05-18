@@ -1,24 +1,54 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import ActionAreaCard from './components/ActionAreaCard';
+import Header from './components/Header';
+
+
+
 
 function App() {
+  const[anzoMainPhoto,setAnzoMainPhoto] = useState({})
+
+
+  
+  useEffect(()=>{
+
+    const fetchAnzoMainPhoto =async () => {
+      const response=await fetch('https://my-first-project-7a53e-default-rtdb.firebaseio.com/anzoMainPhoto.json').then()
+      const responseData = await response.json()
+      const anzoMainPhoto = {
+        cardContent:responseData.cardContent,
+        cardTital:responseData.cardTital,
+        imageUrl:responseData.imageUrl
+      }
+
+      setAnzoMainPhoto(anzoMainPhoto)
+      console.log(anzoMainPhoto)
+    }
+
+    
+    
+    fetchAnzoMainPhoto()
+  },[])
+
+
+  
+
+  
+
+  
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header></Header>
+    <ActionAreaCard 
+    imageUrl={anzoMainPhoto.imageUrl }
+    imageAlt='Anzo Papichulo' 
+    cardTital={anzoMainPhoto.cardTital }
+    cardContent={anzoMainPhoto.cardContent }></ActionAreaCard>
+    
+    </>
   );
 }
 
