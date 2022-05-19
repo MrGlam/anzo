@@ -13,7 +13,6 @@ const Header = () => {
                     </Typography>
                 </AppBar> 
             </Grid>
-            <Grid item  md={4}/>
         </Grid>
         
     );
