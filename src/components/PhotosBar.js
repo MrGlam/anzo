@@ -1,29 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import firebase from '../utils/firebase'
-
+import { getStorage, ref ,listAll,getDownloadURL} from "firebase/storage";
+import '../utils/firebase'
 import { CardMedia } from '@mui/material';
+
 
 const PhotosBar= (props) => {
     const [files,setFiles] = useState([])
     
-    // var storageRef = firebase.storage().ref("images");
+    const storage = getStorage()
+    const imagesRef = ref(storage,'images');
     
-    // useEffect(() => {
-    //     const fetchImages = async () => {
     
-    //     let result = await storageRef.child('images').listAll();
-    //         let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
+    
+    useEffect(() => {
+        const fetchImages = async () => {
+            listAll(imagesRef).then(res => {
+                
+
+                res.items.forEach(element => {
+
+                    getDownloadURL(element)
+                    .then((url) => {
+                        console.log(url)
+                    })
+                    .catch((error) => {
+                        // A full list of error codes is available at
+                        // https://firebase.google.com/docs/storage/web/handle-errors
+                        switch (error.code) {
+                        case 'storage/object-not-found':
+                            // File doesn't exist
+                            break;
+                        case 'storage/unauthorized':
+                            // User doesn't have permission to access the object
+                            break;
+                        case 'storage/canceled':
+                            // User canceled the upload
+                            break;
+
+                        // ...
+
+                        case 'storage/unknown':
+                            // Unknown error occurred, inspect the server response
+                            break;
+                        }
+                    });
+
+                    
+                }); 
+
+
+                
+                
+            })
+    
+        }
         
-    //         return Promise.all(urlPromises);
-    
-    //     }
-        
-    //     const loadImages = async () => {
-    //         const urls = await fetchImages();
-    //         setFiles(urls);
-    //     }
-    //     loadImages();
-    //     }, []);
+        const loadImages = async () => {
+            const urls = await fetchImages();
+            setFiles(urls);
+        }
+        loadImages();
+        }, []);
 
 
 
