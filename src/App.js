@@ -30,25 +30,27 @@ function App() {
 
 
   
-  
   return (
-    
+    <>
     <Grid container alignContent='center' direction="column" spacing={10}>
       <Grid item md={12}>
         <Header></Header>
       </Grid>
       <Grid item align='center'>Click me mate</Grid>
-      <Grid item >
-        <ActionAreaCard 
+      <Grid item md={4} >
+        <ActionAreaCard
+
+        
         imageUrl={anzoMainPhoto.imageUrl}
         imageAlt='Anzo Papichulo' 
         cardTital={anzoMainPhoto.cardTital }
         cardContent={anzoMainPhoto.cardContent }/>
       </Grid>
-      <Grid item>
-        <PhotosBar></PhotosBar>
-      </Grid>
     </Grid>
+      <PhotosBar></PhotosBar>
+    </>
+      
+    
     
     
     
