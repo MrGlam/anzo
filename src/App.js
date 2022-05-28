@@ -39,15 +39,16 @@ function App() {
       <Grid item align='center'>Click me mate</Grid>
       <Grid item md={4} >
         <ActionAreaCard
-
-        
         imageUrl={anzoMainPhoto.imageUrl}
         imageAlt='Anzo Papichulo' 
         cardTital={anzoMainPhoto.cardTital }
         cardContent={anzoMainPhoto.cardContent }/>
       </Grid>
+      <Grid item md={4} />
     </Grid>
-      <PhotosBar></PhotosBar>
+    
+    <PhotosBar updateMainPhoto={setAnzoMainPhoto}></PhotosBar>
+      
     </>
       
     

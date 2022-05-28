@@ -1,8 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { getStorage, ref ,listAll,getDownloadURL} from "firebase/storage";
 import '../utils/firebase'
-import { CardMedia, Grid } from '@mui/material';
-import { Preview } from '@mui/icons-material';
+import { CardMedia, Container, Grid } from '@mui/material';
 
 
 const PhotosBar= (props) => {
@@ -30,27 +29,30 @@ const PhotosBar= (props) => {
 
 
     const photoClickHandler = (event) => {
-        console.log(event.target.src)
-        props.changeMainPhoto({
-            cardContent:"aa",
-            cardTital:"aa",
-            imageUrl:"a"
+        props.updateMainPhoto({
+            cardContent:"",
+            cardTital:"",
+            imageUrl:event.target.src
         })
+        console.log(event.target.src)
+    
     }
 
         
     return (
-        <Grid container>
+        <Container>
+        <Grid container spacing={2}>
         {photosUrl.map((item,index)=>{
-            return <Grid key={index} item md={2}><CardMedia
+            return <Grid key={index} item md={1.5} ><CardMedia
             onClick={photoClickHandler}
             component="img"
-            height="250"
+            height="150"
+            width="200"
             image={item}
             alt={index}
             key={index}/></Grid>
         })}
-        </Grid>
+        </Grid></Container>
     );
 }
 
