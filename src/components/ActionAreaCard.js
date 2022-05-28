@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Collapse } from '@mui/material';
 
 export default function ActionAreaCard(props) {
+  const cardCollapsSize = 400
   const[extendCard,setExtendCard] = useState(false)
 
   const cardClickHandler = () => {
@@ -24,13 +25,13 @@ export default function ActionAreaCard(props) {
 
   
   return (
-      <Collapse  in={extendCard} collapsedSize={250}>
+      <Collapse  in={extendCard} collapsedSize={cardCollapsSize}>
       <Card sx={{ maxWidth: 500 }}>
         <CardActionArea>
           <CardMedia
             onClick={cardClickHandler}
             component="img"
-            height="300"
+            height={cardCollapsSize}
             image={props.imageUrl}
             alt={props.imageAlt}
           />

@@ -22,11 +22,14 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+const mainPhotoPath = "88GmbvxLNFH3TxOw7iCU"
+const allAltPhotosPath = "0KndNbxQ4wdQ05Donnq3"
+
 
 
 
 export async function  fetchAnzoMainPhoto  ()  {
-  const docRef = doc(db, "anzoPhotos","88GmbvxLNFH3TxOw7iCU");
+  const docRef = doc(db, "anzoPhotos",mainPhotoPath);
   const docSnap = await getDoc(docRef);
   const picDetails = docSnap.data()
   const mainPohtoCard ={
@@ -39,7 +42,7 @@ export async function  fetchAnzoMainPhoto  ()  {
 }
 
 export async function  fetchAnzoAlternativesPhoto  ()  {
-  const docRef = doc(db, "anzoPhotos","0KndNbxQ4wdQ05Donnq3");
+  const docRef = doc(db, "anzoPhotos",allAltPhotosPath);
   const docSnap = await getDoc(docRef);
   const picDetails = docSnap.data().anzoAlternativePics
   return picDetails

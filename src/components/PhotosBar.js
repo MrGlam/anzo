@@ -6,7 +6,6 @@ import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOu
 
 const PhotosBar= (props) => {
     const [AlternativeAnzoPhotos,setAlternativeAnzoPhotos] = useState([])
-    const [startEndArrayIndex,setStartEndArrayIndex] = useState({start:0,end:8})
     
 
 
@@ -29,20 +28,27 @@ const PhotosBar= (props) => {
     
     }
 
-    const handleftIconClick = () =>{
+    const handIconsClick = (event) =>{
         const AlternativeAnzoPhotosCopy = [...AlternativeAnzoPhotos]
-        AlternativeAnzoPhotosCopy.push.apply(AlternativeAnzoPhotosCopy, AlternativeAnzoPhotosCopy.splice(0,1))
+        const arrayEndSplice = event.target.id === "left" ? 1 : AlternativeAnzoPhotosCopy.length-1
+        AlternativeAnzoPhotosCopy.push.apply(AlternativeAnzoPhotosCopy, AlternativeAnzoPhotosCopy.splice(0,arrayEndSplice))
         setAlternativeAnzoPhotos(AlternativeAnzoPhotosCopy)
-        
-    
     }
 
-    const handleRightIconClick = () =>{
-        const AlternativeAnzoPhotosCopy = [...AlternativeAnzoPhotos]
-        AlternativeAnzoPhotosCopy.push.apply(AlternativeAnzoPhotosCopy, AlternativeAnzoPhotosCopy.splice(0,AlternativeAnzoPhotosCopy.length-1))
-        setAlternativeAnzoPhotos(AlternativeAnzoPhotosCopy)
-        
-    }
+
+    const anzoAllAlternativePics = AlternativeAnzoPhotos.map((item,index)=>{
+        return <Grid key={index} item md={1.2} ><CardMedia
+        onClick={photoClickHandler}
+        component="img"
+        height="150"
+        width="200"
+        image={item.url}
+        alt={item.content}
+        title={item.title}
+        key={index}/>
+    </Grid>
+    })
+
 
         
     return (
@@ -50,21 +56,10 @@ const PhotosBar= (props) => {
         
         <Grid container spacing={2} alignItems='center' justifyContent="center">
             <Grid item>
-                <ArrowCircleLeftOutlinedIcon onClick={handleftIconClick}/>
+                <ArrowCircleLeftOutlinedIcon id="left" onClick={handIconsClick}/>
             </Grid>
-            {AlternativeAnzoPhotos.slice(startEndArrayIndex.start,startEndArrayIndex.end).map((item,index)=>{
-                return <Grid key={index} item md={1.2} ><CardMedia
-                onClick={photoClickHandler}
-                component="img"
-                height="150"
-                width="200"
-                image={item.url}
-                alt={item.content}
-                title={item.title}
-            
-                key={index}/></Grid>
-            })}
-            <Grid item><ArrowCircleRightOutlinedIcon onClick={handleRightIconClick}/></Grid>
+            {anzoAllAlternativePics.slice(0,8)}
+            <Grid item><ArrowCircleRightOutlinedIcon id="right" onClick={handIconsClick}/></Grid>
             </Grid>
         
         </>
