@@ -1,6 +1,8 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
+
 
 
 const firebaseConfig = {
@@ -19,4 +21,31 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+
+
+
+
+export async function  fetchAnzoMainPhoto  ()  {
+  const docRef = doc(db, "anzoPhotos","88GmbvxLNFH3TxOw7iCU");
+  const docSnap = await getDoc(docRef);
+  const picDetails = docSnap.data()
+  const mainPohtoCard ={
+    imageUrl:picDetails.mainPhoto.url,
+    cardTital:picDetails.mainPhoto.titel,
+    cardContent:picDetails.mainPhoto.content
+  }
+  
+  return (mainPohtoCard)
+}
+
+export async function  fetchAnzoAlternativesPhoto  ()  {
+  const docRef = doc(db, "anzoPhotos","0KndNbxQ4wdQ05Donnq3");
+  const docSnap = await getDoc(docRef);
+  const picDetails = docSnap.data().anzoAlternativePics
+  return picDetails
+}
+
+
+
+
 

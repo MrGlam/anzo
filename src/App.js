@@ -1,9 +1,10 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './App.css';
 import ActionAreaCard from './components/ActionAreaCard';
 import Header from './components/Header';
 import PhotosBar from './components/PhotosBar';
+import {fetchAnzoMainPhoto} from './utils/firebase'
 
 
 
@@ -11,32 +12,28 @@ import PhotosBar from './components/PhotosBar';
 function App() {
   const[anzoMainPhoto,setAnzoMainPhoto] = useState({})
 
+ 
 
   
   useEffect(()=>{
-    const fetchAnzoMainPhoto =async () => {
-      const response=await fetch('https://my-first-project-7a53e-default-rtdb.firebaseio.com/anzoMainPhoto.json').then()
-      const responseData = await response.json()
-      const anzoMainPhoto = {
-        cardContent:responseData.cardContent,
-        cardTital:responseData.cardTital,
-        imageUrl:responseData.imageUrl
-      }
-
-      setAnzoMainPhoto(anzoMainPhoto)
+    const getAnzoMainPic = async () =>{
+      setAnzoMainPhoto(await fetchAnzoMainPhoto())
     }
-    fetchAnzoMainPhoto()
+    getAnzoMainPic()
+    
   },[])
 
 
   
   return (
     <>
-    <Grid container alignContent='center' direction="column" spacing={10}>
+    <Grid container alignContent='center' direction="column" spacing={12}>
       <Grid item md={12}>
         <Header></Header>
       </Grid>
-      <Grid item align='center'>Click me mate</Grid>
+      <Grid item align='center'>
+        <Typography variant='h5'>Click me mate</Typography> 
+      </Grid>
       <Grid item md={4} >
         <ActionAreaCard
         imageUrl={anzoMainPhoto.imageUrl}

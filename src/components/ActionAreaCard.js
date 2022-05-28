@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,17 +11,30 @@ export default function ActionAreaCard(props) {
   const cardClickHandler = () => {
     setExtendCard((prev) => !prev)
   }
+
+  useEffect(() => {
+    const handelImageChange = async () => {
+      setExtendCard((prev) => false)
+    }
+    handelImageChange()
+    
+  },[props.imageUrl])
+
+ 
+
+  
   return (
-    <Collapse  in={extendCard} collapsedSize={250}>
+      <Collapse  in={extendCard} collapsedSize={250}>
       <Card sx={{ maxWidth: 500 }}>
         <CardActionArea>
           <CardMedia
             onClick={cardClickHandler}
             component="img"
-            height="250"
+            height="300"
             image={props.imageUrl}
             alt={props.imageAlt}
           />
+          
           <CardContent>
             <Typography align="center" gutterBottom variant="h5" component="div">
               {props.cardTital}
@@ -33,5 +46,6 @@ export default function ActionAreaCard(props) {
         </CardActionArea>
       </Card>
     </Collapse>
+    
   );
 }

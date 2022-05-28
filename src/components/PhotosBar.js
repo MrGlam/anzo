@@ -1,28 +1,20 @@
 import React, { memo, useEffect, useState } from 'react';
-import { getStorage, ref ,listAll,getDownloadURL} from "firebase/storage";
-import '../utils/firebase'
 import { CardMedia, Container, Grid } from '@mui/material';
-
+import { fetchAnzoAlternativesPhoto } from '../utils/firebase';
+import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 const PhotosBar= (props) => {
-    const [photosUrl,setPhotosUrl] = useState([])
+    const [AlternativeAnzoPhotos,setAlternativeAnzoPhotos] = useState([])
+    const [startEndArrayIndex,setStartEndArrayIndex] = useState({start:0,end:8})
     
-    const storage = getStorage()
-    const imagesRef = ref(storage,'anzoPapiPics');
 
 
-    var anzoPhotosUrls = []
     useEffect(() => {
 
     const fetchImages =  async () => {
-        
-        const response=await listAll(imagesRef)
-        for (const photo of response.items){
-            anzoPhotosUrls.push(await getDownloadURL(photo))}
-        
-        setPhotosUrl(anzoPhotosUrls)
+        setAlternativeAnzoPhotos(await fetchAnzoAlternativesPhoto())
     };
-
         fetchImages();
     },[]); 
 
@@ -30,29 +22,52 @@ const PhotosBar= (props) => {
 
     const photoClickHandler = (event) => {
         props.updateMainPhoto({
-            cardContent:"",
-            cardTital:"",
+            cardContent:event.target.alt,
+            cardTital:event.target.title,
             imageUrl:event.target.src
         })
-        console.log(event.target.src)
     
+    }
+
+    const handleftIconClick = () =>{
+        const AlternativeAnzoPhotosCopy = [...AlternativeAnzoPhotos]
+        AlternativeAnzoPhotosCopy.push.apply(AlternativeAnzoPhotosCopy, AlternativeAnzoPhotosCopy.splice(0,1))
+        setAlternativeAnzoPhotos(AlternativeAnzoPhotosCopy)
+        
+    
+    }
+
+    const handleRightIconClick = () =>{
+        const AlternativeAnzoPhotosCopy = [...AlternativeAnzoPhotos]
+        AlternativeAnzoPhotosCopy.push.apply(AlternativeAnzoPhotosCopy, AlternativeAnzoPhotosCopy.splice(0,AlternativeAnzoPhotosCopy.length-1))
+        setAlternativeAnzoPhotos(AlternativeAnzoPhotosCopy)
+        
     }
 
         
     return (
-        <Container>
-        <Grid container spacing={2}>
-        {photosUrl.map((item,index)=>{
-            return <Grid key={index} item md={1.5} ><CardMedia
-            onClick={photoClickHandler}
-            component="img"
-            height="150"
-            width="200"
-            image={item}
-            alt={index}
-            key={index}/></Grid>
-        })}
-        </Grid></Container>
+        <>
+        
+        <Grid container spacing={2} alignItems='center' justifyContent="center">
+            <Grid item>
+                <ArrowCircleLeftOutlinedIcon onClick={handleftIconClick}/>
+            </Grid>
+            {AlternativeAnzoPhotos.slice(startEndArrayIndex.start,startEndArrayIndex.end).map((item,index)=>{
+                return <Grid key={index} item md={1.2} ><CardMedia
+                onClick={photoClickHandler}
+                component="img"
+                height="150"
+                width="200"
+                image={item.url}
+                alt={item.content}
+                title={item.title}
+            
+                key={index}/></Grid>
+            })}
+            <Grid item><ArrowCircleRightOutlinedIcon onClick={handleRightIconClick}/></Grid>
+            </Grid>
+        
+        </>
     );
 }
 
