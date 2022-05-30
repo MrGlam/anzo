@@ -4,28 +4,38 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Collapse } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { cardExpandActions } from '../../store/cardExpand-slice';
+import { useDispatch } from 'react-redux';
 
 export default function ActionAreaCard(props) {
+  const dispatch = useDispatch()
   const cardCollapsSize = 400
-  const[extendCard,setExtendCard] = useState(false)
+  const expandCard = useSelector(state => state.cardExpand)
+  // const[extendCard,setExtendCard] = useState(false)
+
+  // const cardClickHandler = () => {
+  //   setExtendCard((prev) => !prev)
+  // }
+
+  // useEffect(() => {
+  //   const handelImageChange = async () => {
+  //     setExtendCard((prev) => false)
+  //   }
+  //   handelImageChange()
+    
+  // },[props.imageUrl])
 
   const cardClickHandler = () => {
-    setExtendCard((prev) => !prev)
+    dispatch(cardExpandActions.openCardExpaned())
   }
-
-  useEffect(() => {
-    const handelImageChange = async () => {
-      setExtendCard((prev) => false)
-    }
-    handelImageChange()
-    
-  },[props.imageUrl])
 
  
 
   
   return (
-      <Collapse  in={extendCard} collapsedSize={cardCollapsSize}>
+      // <Collapse  in={extendCard} collapsedSize={cardCollapsSize}>
+      <Collapse  in={expandCard} collapsedSize={cardCollapsSize}>
       <Card sx={{ maxWidth: 500 }}>
         <CardActionArea>
           <CardMedia
