@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
-import { CardMedia, Container, Grid } from '@mui/material';
-import { fetchAnzoAlternativesPhoto } from '../utils/firebase';
+import { CardMedia, Grid } from '@mui/material';
+import { fetchAnzoAlternativesPhoto } from '../../utils/firebase';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 

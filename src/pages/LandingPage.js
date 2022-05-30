@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
-import PhotosBar from '../components/PhotosBar'
+import PhotosBar from '../components/loadingPageAssets/PhotosBar'
 import {fetchAnzoMainPhoto} from '../utils/firebase'
-import ActionAreaCard from '../components/ActionAreaCard';
+import ActionAreaCard from '../components/loadingPageAssets/ActionAreaCard';
 
 const LandingPage = () => {
     const[anzoMainPhoto,setAnzoMainPhoto] = useState({})
@@ -17,7 +17,7 @@ const LandingPage = () => {
 
     return (
         <>
-        <Grid container alignContent='center' direction="column" spacing={12}>
+        <Grid container alignContent='center' direction="column" spacing={8}>
             <Grid item md={4} />
             <Grid item align='center'>
                 <Typography variant='h5'>Click me mate</Typography> 

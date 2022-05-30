@@ -1,15 +1,16 @@
-import { AppBar, Grid, Typography } from '@mui/material';
 import React from 'react';
+import ResponsiveAppBar from './ResponsiveAppBar';
 
 const Header = () => {
 
     
     return (
-        <AppBar align='center' >
-            <Typography variant="h3">
-                Welcome to Anzo Papi's life
-            </Typography>
-        </AppBar> 
+        // <AppBar align='center' >
+        //     <Typography variant="h3">
+        //         Welcome to Anzo Papi's life
+        //     </Typography>
+        // </AppBar> 
+        <ResponsiveAppBar></ResponsiveAppBar>
     );
 };
 
