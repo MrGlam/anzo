@@ -21,7 +21,7 @@ const PhotosBar= (props) => {
 
 
     const photoClickHandler = (event) => {
-        dispatch(cardExpandActions.closeCardExpaned())
+        dispatch(cardExpandActions.closeCardExpand())
         props.updateMainPhoto({
             cardContent:event.target.alt,
             cardTital:event.target.title,
@@ -39,7 +39,8 @@ const PhotosBar= (props) => {
 
 
     const anzoAllAlternativePics = AlternativeAnzoPhotos.map((item,index)=>{
-        return <Grid key={index} item md={1.2} ><CardMedia
+        return <Grid key={index} item md={1.2} >
+            <CardMedia
         onClick={photoClickHandler}
         component="img"
         height="150"

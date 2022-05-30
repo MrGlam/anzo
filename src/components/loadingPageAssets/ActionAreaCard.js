@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 export default function ActionAreaCard(props) {
   const dispatch = useDispatch()
   const cardCollapsSize = 400
-  const expandCard = useSelector(state => state.cardExpand)
+  const expandCard = useSelector(state => state.cardExpand).cardExpand
   // const[extendCard,setExtendCard] = useState(false)
 
   // const cardClickHandler = () => {
@@ -27,7 +27,8 @@ export default function ActionAreaCard(props) {
   // },[props.imageUrl])
 
   const cardClickHandler = () => {
-    dispatch(cardExpandActions.openCardExpaned())
+    dispatch(cardExpandActions.clickCard())
+    console.log(expandCard)
   }
 
  

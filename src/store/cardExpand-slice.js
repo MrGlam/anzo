@@ -4,11 +4,11 @@ const cardExpand= createSlice({
     name:'cardExpand',
     initialState:{cardExpand:false},
     reducers:{
-        closeCardExpaned(state){
+        closeCardExpand(state){
             state.cardExpand = false
         },
-        openCardExpaned(state){
-            state.cardExpand = false
+        clickCard(state){
+            state.cardExpand = !state.cardExpand
         }
     }
 })

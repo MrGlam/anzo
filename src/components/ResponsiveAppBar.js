@@ -118,9 +118,8 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link style={{ textDecoration: 'none', color: 'white' }} to={'/'.concat(page)}>
+              <Link key={page} style={{ textDecoration: 'none', color: 'white' }} to={'/'.concat(page)}>
                 <Button
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
