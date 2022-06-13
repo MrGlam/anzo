@@ -5,6 +5,8 @@ import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutl
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import { cardExpandActions } from '../../store/cardExpand-slice';
 import { useDispatch } from 'react-redux';
+import { motion } from "framer-motion";
+
 const PhotosBar= (props) => {
     const [AlternativeAnzoPhotos,setAlternativeAnzoPhotos] = useState([])
     const dispatch = useDispatch()
@@ -39,7 +41,8 @@ const PhotosBar= (props) => {
 
 
     const anzoAllAlternativePics = AlternativeAnzoPhotos.map((item,index)=>{
-        return <Grid key={index} item md={1.2} >
+        return<Grid key={index} item md={1.2} >
+             <motion.div className="img-wrap" layout whileHover={{opacity:1}} key={index} >
             <CardMedia
         onClick={photoClickHandler}
         component="img"
@@ -49,7 +52,10 @@ const PhotosBar= (props) => {
         alt={item.content}
         title={item.title}
         key={index}/>
+        </motion.div>
     </Grid>
+   
+    
     })
 
 
@@ -62,7 +68,9 @@ const PhotosBar= (props) => {
                 <ArrowCircleLeftOutlinedIcon id="left" onClick={handIconsClick}/>
             </Grid>
             {anzoAllAlternativePics.slice(0,8)}
-            <Grid item><ArrowCircleRightOutlinedIcon id="right" onClick={handIconsClick}/></Grid>
+            <Grid item>
+                <ArrowCircleRightOutlinedIcon id="right" onClick={handIconsClick}/>
+                </Grid>
             </Grid>
         
         </>

@@ -8,10 +8,6 @@ import LandingPage from './pages/LandingPage';
 
 
 function App() {
-  
-
-
-  
   return (
     <>
     <Header></Header>

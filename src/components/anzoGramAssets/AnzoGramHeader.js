@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import Modal from './anzoGramAssets/Modal';
-import UploadForm from './anzoGramAssets/UploadForm';
-import ImageGrid from './anzoGramAssets/ImageGrid';
-import Title from './anzoGramAssets/Title';
+import Modal from './Modal';
+import UploadForm from './UploadForm';
+import ImageGrid from './ImageGrid';
+import Title from './Title';
 
 
 function AnzoGramHeader() {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
-import PhotosBar from '../components/loadingPageAssets/PhotosBar'
+import PhotosBar from '../components/landingPageAssets/PhotosBar'
 import {fetchAnzoMainPhoto} from '../utils/firebase'
-import ActionAreaCard from '../components/loadingPageAssets/ActionAreaCard';
+import ActionAreaCard from '../components/landingPageAssets/ActionAreaCard'
 
 const LandingPage = () => {
     const[anzoMainPhoto,setAnzoMainPhoto] = useState({})

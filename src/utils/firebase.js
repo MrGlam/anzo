@@ -1,7 +1,16 @@
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import "firebase/compat/storage";
+
+
+
+
+
+
+
 
 
 
@@ -25,6 +34,14 @@ const db = getFirestore(app);
 const mainPhotoPath = "88GmbvxLNFH3TxOw7iCU"
 const allAltPhotosPath = "0KndNbxQ4wdQ05Donnq3"
 
+firebase.initializeApp(firebaseConfig);
+const projectStorage = firebase.storage();
+const projectFireStore = firebase.firestore();
+const timestemp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+
+
 
 
 
@@ -47,6 +64,12 @@ export async function  fetchAnzoAlternativesPhoto  ()  {
   const picDetails = docSnap.data().anzoAlternativePics
   return picDetails
 }
+
+
+
+
+export { projectStorage, projectFireStore,timestemp};
+
 
 
 
