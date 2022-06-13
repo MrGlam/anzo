@@ -1,4 +1,3 @@
-import React,{useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,30 +11,15 @@ export default function ActionAreaCard(props) {
   const dispatch = useDispatch()
   const cardCollapsSize = 400
   const expandCard = useSelector(state => state.cardExpand).cardExpand
-  // const[extendCard,setExtendCard] = useState(false)
-
-  // const cardClickHandler = () => {
-  //   setExtendCard((prev) => !prev)
-  // }
-
-  // useEffect(() => {
-  //   const handelImageChange = async () => {
-  //     setExtendCard((prev) => false)
-  //   }
-  //   handelImageChange()
-    
-  // },[props.imageUrl])
-
+  
   const cardClickHandler = () => {
     dispatch(cardExpandActions.clickCard())
-    console.log(expandCard)
   }
 
  
 
   
   return (
-      // <Collapse  in={extendCard} collapsedSize={cardCollapsSize}>
       <Collapse  in={expandCard} collapsedSize={cardCollapsSize}>
       <Card sx={{ maxWidth: 500 }}>
         <CardActionArea>
